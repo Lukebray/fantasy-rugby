@@ -4,7 +4,7 @@ from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship
 from datetime import datetime, timezone
 from .User import Base
 
-class LeagueMembership(Base):
+class LeagueMember(Base):
     __tablename__ = "league_membership"
 
     id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)

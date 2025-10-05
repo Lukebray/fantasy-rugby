@@ -1,6 +1,6 @@
 from models.League import League
 from models.User import User
-from models.LeagueMembership import LeagueMembership
+from models.LeagueMember import LeagueMember
 from app.database import SessionLocal
 
 def test_create_league_membership():
@@ -21,7 +21,7 @@ def test_create_league_membership():
         found_user = db.query(User).filter(User.username == "testuser").first()
 
         # Create a league membership
-        league_membership = LeagueMembership(user_id=found_user.id, league_id=found_league.id)
+        league_membership = LeagueMember(user_id=found_user.id, league_id=found_league.id)
         db.add(league_membership)
         db.commit()
         db.refresh(league_membership)

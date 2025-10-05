@@ -11,6 +11,7 @@ class User(Base):
 
     id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
     username: Mapped[str] = mapped_column(String(32), unique=True, index=True)
-    password: Mapped[str] = mapped_column(String(255))  # Hashed passwords need space
-    email: Mapped[str] = mapped_column(String(320), unique=True, index=True)  # Required field
+    hashed_password: Mapped[str] = mapped_column(String(255))  # Store hashed passwords
+    email: Mapped[str] = mapped_column(String(320), unique=True, index=True)
+    is_active: Mapped[bool] = mapped_column(default=True)
     created_at: Mapped[datetime] = mapped_column(DateTime, default=lambda: datetime.now(timezone.utc))
