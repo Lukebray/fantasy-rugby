@@ -11,4 +11,9 @@ class League(Base):
     competition_id: Mapped[int] = mapped_column(ForeignKey("competition.id"), nullable=False)
     name: Mapped[str] = mapped_column(String(32), unique=True, index=True)
     join_code: Mapped[str] = mapped_column(String(32), unique=True, index=True)
+    is_locked: Mapped[bool] = mapped_column(default=False, nullable=True)
     created_at: Mapped[datetime] = mapped_column(DateTime, default=lambda: datetime.now(timezone.utc))
+
+    # Relationships
+    competition: Mapped["Competition"] = relationship("Competition", back_populates="leagues")
+    members: Mapped[List["LeagueMember"]] = relationship("LeagueMember", back_populates="league")

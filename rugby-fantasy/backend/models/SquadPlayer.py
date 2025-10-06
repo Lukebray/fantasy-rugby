@@ -12,3 +12,7 @@ class SquadPlayer(Base):
     player_id: Mapped[int] = mapped_column(ForeignKey("player.id"), nullable=False)
     is_starter: Mapped[bool] = mapped_column(default=False)
     created_at: Mapped[datetime] = mapped_column(DateTime, default=lambda: datetime.now(timezone.utc))
+
+    # Relationships
+    squad: Mapped["Squad"] = relationship("Squad", back_populates="squad_players")
+    player: Mapped["Player"] = relationship("Player", back_populates="squad_players")

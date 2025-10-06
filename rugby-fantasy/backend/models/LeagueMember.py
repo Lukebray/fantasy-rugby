@@ -13,3 +13,8 @@ class LeagueMember(Base):
     points: Mapped[int] = mapped_column(default=0)
     position_in_league: Mapped[int] = mapped_column(default=0)
     created_at: Mapped[datetime] = mapped_column(DateTime, default=lambda: datetime.now(timezone.utc))
+
+    # Relationships
+    user: Mapped["User"] = relationship("User", back_populates="league_memberships")
+    league: Mapped["League"] = relationship("League", back_populates="members")
+    squad: Mapped["Squad"] = relationship("Squad", back_populates="league_member")

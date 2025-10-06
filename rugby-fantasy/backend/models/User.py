@@ -15,3 +15,7 @@ class User(Base):
     email: Mapped[str] = mapped_column(String(320), unique=True, index=True)
     is_active: Mapped[bool] = mapped_column(default=True)
     created_at: Mapped[datetime] = mapped_column(DateTime, default=lambda: datetime.now(timezone.utc))
+
+    # Relationships
+    league_memberships: Mapped[List["LeagueMember"]] = relationship("LeagueMember", back_populates="user")
+    squads: Mapped[List["Squad"]] = relationship("Squad", back_populates="user")

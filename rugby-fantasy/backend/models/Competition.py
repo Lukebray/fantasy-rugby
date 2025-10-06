@@ -12,3 +12,7 @@ class Competition(Base):
     start_date: Mapped[datetime] = mapped_column(DateTime)
     end_date: Mapped[datetime] = mapped_column(DateTime)
     created_at: Mapped[datetime] = mapped_column(DateTime, default=lambda: datetime.now(timezone.utc))
+
+    # Relationships
+    leagues: Mapped[List["League"]] = relationship("League", back_populates="competition")
+    rounds: Mapped[List["CompetitionRound"]] = relationship("CompetitionRound", back_populates="competition")

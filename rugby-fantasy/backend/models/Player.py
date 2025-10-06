@@ -13,3 +13,7 @@ class Player(Base):
     nation: Mapped[str] = mapped_column(String(32))  # e.g. "IRE", "ENG", "FRA", "SCO", "WAL", "ITA"
     is_active: Mapped[bool] = mapped_column(default=True)
     created_at: Mapped[datetime] = mapped_column(DateTime, default=lambda: datetime.now(timezone.utc))
+
+    # Relationships
+    squad_players: Mapped[List["SquadPlayer"]] = relationship("SquadPlayer", back_populates="player")
+    round_stats: Mapped[List["RoundStats"]] = relationship("RoundStats", back_populates="player")

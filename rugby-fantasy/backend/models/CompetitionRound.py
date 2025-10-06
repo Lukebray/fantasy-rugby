@@ -14,3 +14,8 @@ class CompetitionRound(Base):
     end_date: Mapped[datetime] = mapped_column(DateTime)
     transfer_deadline: Mapped[datetime] = mapped_column(DateTime)
     created_at: Mapped[datetime] = mapped_column(DateTime, default=lambda: datetime.now(timezone.utc))
+
+    # Relationships
+    competition: Mapped["Competition"] = relationship("Competition", back_populates="rounds")
+    round_stats: Mapped[List["RoundStats"]] = relationship("RoundStats", back_populates="competition_round")
+    transfers: Mapped[List["Transfer"]] = relationship("Transfer", back_populates="competition_round")

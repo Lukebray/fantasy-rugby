@@ -24,3 +24,7 @@ class RoundStats(Base):
     # Calculated fantasy points (based on above stats)
     fantasy_points: Mapped[int] = mapped_column(default=0)
     created_at: Mapped[datetime] = mapped_column(DateTime, default=lambda: datetime.now(timezone.utc))
+
+    # Relationships
+    competition_round: Mapped["CompetitionRound"] = relationship("CompetitionRound", back_populates="round_stats")
+    player: Mapped["Player"] = relationship("Player", back_populates="round_stats")

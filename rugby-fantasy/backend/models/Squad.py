@@ -15,3 +15,13 @@ class Squad(Base):
     kicker_id: Mapped[int] = mapped_column(ForeignKey("player.id"), nullable=True)
     backup_kicker_id: Mapped[int] = mapped_column(ForeignKey("player.id"), nullable=True)
     created_at: Mapped[datetime] = mapped_column(DateTime, default=lambda: datetime.now(timezone.utc))
+
+    # Relationships
+    user: Mapped["User"] = relationship("User", back_populates="squads")
+    league_member: Mapped["LeagueMember"] = relationship("LeagueMember", back_populates="squad")
+    captain: Mapped["Player"] = relationship("Player", foreign_keys=[captain_id])
+    vice_captain: Mapped["Player"] = relationship("Player", foreign_keys=[vice_captain_id])
+    kicker: Mapped["Player"] = relationship("Player", foreign_keys=[kicker_id])
+    backup_kicker: Mapped["Player"] = relationship("Player", foreign_keys=[backup_kicker_id])
+    squad_players: Mapped[List["SquadPlayer"]] = relationship("SquadPlayer", back_populates="squad")
+    transfers: Mapped[List["Transfer"]] = relationship("Transfer", back_populates="squad")
