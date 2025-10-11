@@ -11,7 +11,7 @@ class Transfer(Base):
     squad_id: Mapped[int] = mapped_column(ForeignKey("squad.id"), nullable=False)
     competition_round_id: Mapped[int] = mapped_column(ForeignKey("competition_round.id"), nullable=False)
     player_in_id: Mapped[int] = mapped_column(ForeignKey("player.id"), nullable=False)
-    player_out_id: Mapped[int] = mapped_column(ForeignKey("player.id"), nullable=False)
+    player_out_id: Mapped[int] = mapped_column(ForeignKey("player.id"), nullable=True)
     created_at: Mapped[datetime] = mapped_column(DateTime, default=lambda: datetime.now(timezone.utc))
 
     # Relationships

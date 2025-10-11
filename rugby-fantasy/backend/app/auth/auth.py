@@ -15,7 +15,7 @@ load_dotenv()
 # Security configuration
 SECRET_KEY = os.getenv("SECRET_KEY")  # Change this!
 ALGORITHM = "HS256"
-ACCESS_TOKEN_EXPIRE_MINUTES = 30
+ACCESS_TOKEN_EXPIRE_MINUTES = 480
 
 # Password hashing - use bcrypt directly to avoid passlib version issues
 import bcrypt

@@ -4,20 +4,18 @@ from sqlalchemy.orm import Session
 from ..database import get_db
 from ..auth.auth import get_current_user
 from models.User import User
-from ..schemas.stats import PlayerStatsResponse
-from ..services.stats_service import StatsService
+from ..services.competition_service import CompetitionService
 
-router = APIRouter(prefix="/stats", tags=["stats"])
+router = APIRouter(prefix="/competitions", tags=["competitions"])
 
-@router.get("/player/{player_id}/round/{round_id}", response_model=PlayerStatsResponse)
-def get_player_stats_for_round(
-    player_id: int,
+@router.get("/round/{round_id}/transfer-deadline")
+def get_round_transfer_deadline(
     round_id: int,
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user)
 ):
     try:
-        player_stats = StatsService.get_player_stats_for_round(db, player_id, round_id)
-        return player_stats
+        deadline = CompetitionService.get_round_transfer_deadline(db, round_id)
+        return deadline
     except ValueError as e:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=str(e))

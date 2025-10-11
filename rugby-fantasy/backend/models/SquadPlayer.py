@@ -9,7 +9,8 @@ class SquadPlayer(Base):
 
     id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
     squad_id: Mapped[int] = mapped_column(ForeignKey("squad.id"), nullable=False)
-    player_id: Mapped[int] = mapped_column(ForeignKey("player.id"), nullable=False)
+    player_id: Mapped[int] = mapped_column(ForeignKey("player.id"), nullable=True)
+    squad_position: Mapped[str] = mapped_column(String(10))
     is_starter: Mapped[bool] = mapped_column(default=False)
     created_at: Mapped[datetime] = mapped_column(DateTime, default=lambda: datetime.now(timezone.utc))
 

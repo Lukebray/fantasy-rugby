@@ -13,6 +13,7 @@ class CompetitionRound(Base):
     start_date: Mapped[datetime] = mapped_column(DateTime)
     end_date: Mapped[datetime] = mapped_column(DateTime)
     transfer_deadline: Mapped[datetime] = mapped_column(DateTime)
+    transfer_limit: Mapped[int] = mapped_column(default=5)
     created_at: Mapped[datetime] = mapped_column(DateTime, default=lambda: datetime.now(timezone.utc))
 
     # Relationships

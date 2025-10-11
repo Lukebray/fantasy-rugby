@@ -1,5 +1,5 @@
 from pydantic import BaseModel, Field
-from typing import Optional, List
+from typing import List
 from datetime import datetime
 
 # This is the request body definition for creating a league
@@ -52,5 +52,16 @@ class LeagueDetailsResponse(BaseModel):
     members: List[LeagueMemberInfo]
     created_at: datetime
     
+    class Config:
+        from_attributes = True
+
+class MyLeagueItem(BaseModel):
+    id: int
+    name: str
+    competition_name: str
+    member_count: int
+    my_position: int
+    my_points: int
+
     class Config:
         from_attributes = True
